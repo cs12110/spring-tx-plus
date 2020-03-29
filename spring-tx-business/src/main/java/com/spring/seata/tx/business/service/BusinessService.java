@@ -49,6 +49,26 @@ public class BusinessService {
         return BizResponse.createSuccessResponse(commitStorage);
     }
 
+    /**
+     * 不使用全局事务
+     *
+     * @param commitOrder   提交订单
+     * @param commitStorage 提交库存
+     * @return BizResponse
+     */
+    public BizResponse doBusinessWithoutTx(boolean commitOrder, boolean commitStorage) {
+        log.info("doBusinessWithoutTx,commitOrder:{},commitStorage:{}", commitOrder, commitStorage);
+        try {
+            callOrderService(commitOrder);
+            callStorageService(commitStorage);
+        } catch (Exception e) {
+            log.error("doBusinessWithoutTx,commitOrder:" + commitOrder + ",commitStorage:" + commitStorage, e);
+            throw new BizException("error:" + e.getMessage());
+        }
+
+        return BizResponse.createSuccessResponse(commitStorage);
+    }
+
 
     private void callOrderService(boolean commit) {
         String url = serviceUrlComponent.getOrderUrl() + "/api/order/handleWithOrder?commit=" + commit;

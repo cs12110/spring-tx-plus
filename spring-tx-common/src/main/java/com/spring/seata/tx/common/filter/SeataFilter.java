@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 处理全局事务xid过滤器
+ *
  * <p>
  *
  * @author cs12110 create at 2020-03-29 01:21

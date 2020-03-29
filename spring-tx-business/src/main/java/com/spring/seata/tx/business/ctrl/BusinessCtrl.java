@@ -24,7 +24,14 @@ public class BusinessCtrl {
 
     @RequestMapping("/deal")
     @ResponseBody
-    public BizResponse business(boolean commitOrder,boolean commitStorage) {
+    public BizResponse dealWithTx(boolean commitOrder,boolean commitStorage) {
         return businessService.doBusiness(commitOrder,commitStorage);
+    }
+
+
+    @RequestMapping("/dealWithoutTx")
+    @ResponseBody
+    public BizResponse dealWithoutTx(boolean commitOrder,boolean commitStorage) {
+        return businessService.doBusinessWithoutTx(commitOrder,commitStorage);
     }
 }
